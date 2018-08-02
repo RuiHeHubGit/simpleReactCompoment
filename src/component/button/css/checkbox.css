@@ -1,0 +1,28 @@
+.checkbox {
+    display: table-cell;
+    user-select: none;
+    cursor: pointer;
+}
+
+.checkbox:hover :nth-child(1){
+    box-shadow: 0 0 1px 1px #00aadd;
+}
+
+.checkboxButton {
+    display: inline-block;
+    width: 14px;
+    height: 14px;
+    border-radius: 2px;
+    background-color: rgba(255, 255, 255, 0.9);
+    border: 2px solid #5aa;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 95%;
+}
+
+.checkboxText {
+    display: inline;
+    position: relative;
+    padding-left: 8px;
+    bottom: 2px;
+}

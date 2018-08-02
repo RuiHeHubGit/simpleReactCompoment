@@ -1,0 +1,60 @@
+@keyframes progressAnimations{
+    0%{background-image:-webkit-gradient(linear, 0% 100%, 10% 100%, from(#45B5DA), to(#0382AD));}
+    20%{background-image:-webkit-gradient(linear, 10% 80%, 20% 100%, from(#45B5DA), to(#0382AD));}
+    30%{background-image:-webkit-gradient(linear, 20% 60%, 40% 100%, from(#45B5DA), to(#0382AD));}
+    50%{background-image:-webkit-gradient(linear, 30% 40%, 60% 100%, from(#45B5DA), to(#0382AD));}
+    80%{background-image:-webkit-gradient(linear, 40% 20%, 80% 100%, from(#45B5DA), to(#0382AD));}
+    100%{background-image:-webkit-gradient(linear, 50% 10%, 100% 100%, from(#45B5DA), to(#0382AD));}
+}
+@keyframes subProgressAnimations{
+    0%{background-image:-webkit-gradient(linear, 0% 100%, 10% 100%, from(#ddbc16), to(#dd8927));}
+    20%{background-image:-webkit-gradient(linear, 10% 80%, 20% 100%, from(#ddbc16), to(#dd8927));}
+    30%{background-image:-webkit-gradient(linear, 20% 60%, 40% 100%, from(#ddbc16), to(#dd8927));}
+    50%{background-image:-webkit-gradient(linear, 30% 40%, 60% 100%, from(#ddbc16), to(#dd8927));}
+    80%{background-image:-webkit-gradient(linear, 40% 20%, 80% 100%, from(#ddbc16), to(#dd8927));}
+    100%{background-image:-webkit-gradient(linear, 50% 10%, 100% 100%, from(#ddbc16), to(#dd8927));}
+}
+
+
+.progressBar{
+    position: relative;
+    display: table-cell;
+    user-select: none;
+    background: rgba(85, 170, 170, 0.8);
+    width: 200px;
+    height: 12px;
+    border-radius: 6px;
+    overflow: hidden;
+}
+
+.progress{
+    position: absolute;
+    background-image:-webkit-gradient(linear, 0% 50%, 50% 100%, from(#45B5DA), to(#0382AD));
+    height: 100%;
+    border: none;
+    transition: width .5s ease-in;
+    animation:progressAnimations .6s linear infinite alternate;
+}
+
+.subProgress{
+    position: absolute;
+    background-image:-webkit-gradient(linear, 0% 50%, 50% 100%, from(#ddbc16), to(#dd8927));
+    height: 100%;
+    border: none;
+    transition: width .1s ease-in;
+    animation:subProgressAnimations 1s linear infinite alternate;
+}
+
+.progressText{
+    position: absolute;
+    right: 5%;
+    margin: -2px;
+    font-size: 6px;
+}
+
+.subProgressText{
+    position: absolute;
+    left: 5%;
+    margin: -2px;
+    font-size: 6px;
+}

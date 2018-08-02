@@ -1,0 +1,52 @@
+.textEditBox {
+    position: relative;
+    background-color: #fff;
+    height: 30px;
+    width: 200px;
+    display: table-cell;
+}
+
+.textEditInput {
+    position: absolute;
+    background-color: transparent;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    padding: 5px;
+    font-size: 15px;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    border-bottom:3px solid #5aa;
+}
+
+.textEditInput:focus{
+    border-bottom:3px solid rgba(0, 170, 221, 0.11);
+}
+
+.textEditInputHaveLeftOrRight {
+     width: calc(100% - 30px);
+ }
+
+.textEditInputHaveLeftAndRight {
+    width: calc(100% - 50px);
+}
+
+.textEditLeft {
+    position: absolute;
+    height: 100%;
+    left: 0;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 90%;
+}
+
+.textEditRight {
+    position: absolute;
+    height: 100%;
+    right: 0;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 90%;
+}

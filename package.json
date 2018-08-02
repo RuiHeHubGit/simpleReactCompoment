@@ -1,0 +1,27 @@
+{
+  "name": "eaui",
+  "version": "1.2.0",
+  "private": false,
+  "dependencies": {
+    "react": "^16.4.1",
+    "react-dom": "^16.4.1",
+    "react-scripts": "1.1.4"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject"
+  },
+  "publishConfig": {
+    "registry": "http://10.86.32.91/repository/npm-private/"
+  },
+  "description": "This project was bootstrapped with [Create React App](https://github.com/facebookincubator/create-react-app).",
+  "main": "index.js",
+  "devDependencies": {},
+  "author": "herui",
+  "license": "ISC",
+  "keywords": [
+    "eaui"
+  ]
+}

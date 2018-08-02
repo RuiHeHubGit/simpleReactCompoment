@@ -1,0 +1,14 @@
+.button{
+    padding: 5px;
+    border-radius: 3px;
+    background-color: #d3d3d8;
+    text-overflow:ellipsis;
+    white-space: nowrap;
+    display: table-cell;
+    user-select: none;
+    cursor: pointer;
+}
+
+.button:hover{
+     opacity: 0.8;
+ }
