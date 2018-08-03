@@ -66,6 +66,11 @@ class ProgressBar extends Component {
 
     checkSubAndSet() {
         let mode = 0;
+        if(this.props.subMax === -1) {
+            this.state.subProgress = 0;
+            this.state.subPercent = 0;
+            return 0;
+        }
         let max = this.props.subMax || this.state.subMax;
         this.state.subMax = max;
         if(max > 0 && this.props.subProgress >= 0) {

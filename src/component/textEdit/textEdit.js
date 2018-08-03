@@ -56,8 +56,6 @@ class TextEdit extends Component {
         });
 
         this.refs.input.addEventListener("click", (event)=>{
-            console.log(event)
-            console.log(this.refs.input.getBoundingClientRect());
             let rect = this.refs.input.getBoundingClientRect();
             let x = event.clientX-rect.left;
             console.log(x)
@@ -70,7 +68,7 @@ class TextEdit extends Component {
     }
 
     getValue() {
-        return this.refs.input.value;
+        return this.state.value;
     }
 
     setValue(value) {

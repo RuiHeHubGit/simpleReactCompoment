@@ -28,8 +28,9 @@ class Toast extends Component{
         }
 
         if(this.needShow) {
-            this.prepareMessage();
-            this.startTimer();
+            if(this.getMessage()) {
+                this.startTimer();
+            }
             this.needShow = false;
         }
 
@@ -41,6 +42,9 @@ class Toast extends Component{
 
     componentWillReceiveProps() {
         this.haveNewMsg = true;
+        if(this.props.noQueue) {
+            console.log(this.props);
+        }
     }
 
     addMessageToQueue() {
@@ -55,16 +59,20 @@ class Toast extends Component{
         });
     }
 
-    prepareMessage() {
+    getMessage() {
         let msg = null;
-        if(this.queue && this.queue.getSize() > 0) {
+        if(!this.timer && this.queue && this.queue.getSize() > 0) {
             msg = this.queue.poll();
         } else {
             msg = this.props;
         }
-        this.preDelay = msg.preDelay || this.preDelay || 200;
-        this.duration = msg.duration || this.duration || 3000;
-        this.message = msg.message;
+        if(msg.message != null) {
+            this.preDelay = msg.preDelay || this.preDelay || 200;
+            this.duration = msg.duration || this.duration || 3000;
+            this.message = msg.message;
+            return true;
+        }
+        return false;
     }
 
     startTimer() {
@@ -90,6 +98,7 @@ class Toast extends Component{
             clearTimeout(this.timer);
             this.timer = null;
         }
+        this.message = null;
         this.setState({"style":{"display":"none"}, message:null});
     }
 }

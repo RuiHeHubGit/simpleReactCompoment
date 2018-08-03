@@ -17,7 +17,7 @@ class App extends Component {
     constructor() {
         super();
         this.state = {msg1: "", msg2: "", toastTestMsg: "toastTestMsg", edit3Type:"password", edit3Right:eyeView, prs:0,subPrs:0, max:0, subMax:0};
-        this.fileSizes = [1000, 2000, 200, 3000, 2000];
+        this.fileSizes = [100, 200, 20, 60, 10, 300, 160];
     }
     render() {
         return (
@@ -33,7 +33,7 @@ class App extends Component {
                     <Toast message={this.state.toastTestMsg} align="left" preDelay={1100} duration={3400}/>
                     <Toast message={this.state.toastTestMsg} align="right" preDelay={1300} duration={3200}/>
                     <Toast message={this.state.msg1} />
-                    <Toast message={this.state.msg2} noQueue={true} duration={4000} align="bottom"/>
+                    <Toast message={this.state.msg2} noQueue={true} align="bottom"/>
                     <TextView text="FlowLayout Test"/>
                     <FlowLayout style={{"backgroundColor":"rgba(255,255,255,.8)", "padding":"22px", "boxShadow":"0 0 5px 2px rgba(0,100,200,.6)"}} children={[
                         <TextView text={"TextView1"} style={{"margin":"22px"}}/>,
@@ -85,9 +85,7 @@ class App extends Component {
                     ]}/>
                 </div>
                 <div>
-                    {this.state.msg1 = null}
-                    {this.state.msg2 = null}
-                    {this.state.toastTestMsg = null}
+                    {this.onRendered()}
                 </div>
             </div>
         )
@@ -97,6 +95,12 @@ class App extends Component {
         this.load();
     }
 
+    onRendered() {
+        this.state.msg1 = null;
+        this.state.msg2 = null;
+        this.state.toastTestMsg = null;
+    }
+
     load() {
         var count = this.fileSizes.reduce((a, b)=>(a+b));
         var prs = 0;
@@ -104,20 +108,22 @@ class App extends Component {
         var subPrs = 0;
         this.setState({max:count});
         this.timer = setInterval(()=>{
-            prs+=100;
-            subPrs += 100;
+            prs += 10;
+            subPrs += 10;
             if(subPrs>= this.fileSizes[index]) {
                 subPrs = 0;
                 ++index;
                 if(index == this.fileSizes.length) {
                     clearTimeout(this.timer);
-                    this.load();
+                    setTimeout(()=>{this.setState({"msg1":"reload"});this.load();}, 10000);
+                    this.setState({prs: prs, subMax:-1});
                     return;
+                } else {
+                    this.setState({subMax:this.fileSizes[index]});
                 }
-                this.setState({subMax:this.fileSizes[index]});
             }
             this.setState({prs: prs, subPrs: subPrs});
-        }, 300);
+        }, 500);
     }
 }
 

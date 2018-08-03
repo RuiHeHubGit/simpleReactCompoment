@@ -2,7 +2,7 @@
 class StoreRecentQueue {
     constructor(maxSize) {
         this.maxSize = maxSize || 10;
-        this.arr = new Array(maxSize);
+        this.arr = new Array(this.maxSize);
         this.size = 0;
         this.front = -1;
         this.rear = -1;
