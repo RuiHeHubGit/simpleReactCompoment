@@ -88,10 +88,10 @@ class SwitchButton extends Component {
     }
 
     handleClick () {
+        this.setState({on: !this.state.on});
         if(this.props.onchange != null) {
             this.props.onchange(this.state.on, this);
         }
-        this.setState({on: !this.state.on});
     }
 }
 
