@@ -8,43 +8,20 @@ class Toast extends Component{
         this.alignCssClassName = {"top":"toastAlignTop", "center":"toastAlignCenter", "bottom":"toastAlignBottom",
             left:"toastAlignLeft", right:"toastAlignRight"}[this.props.align || "center"] || "toastAlignCenter";
         this.state = {style: {"display": "none"}};
-        this.preDelay = this.props.preDelay || 200;
-        this.duration = this.props.duration || 2000;
         this.queue = null;
-        this.needShow = Boolean(this.props.message);
+        this.handelMessage();
     }
 
     render() {
         if(this.haveNewMsg) {
-            this.noQueue = this.props.noQueue == true || this.noQueue;
-            if(!this.noQueue && this.timer) {
-                this.addMessageToQueue();
-            } else {
-                this.needShow = true;
-            }
-            this.haveNewMsg = false;
-        } else if(!this.timer && this.queue && this.queue.getSize() > 0) {
-            this.needShow = true;
-        }
-
-        if(this.needShow) {
-            if(this.getMessage()) {
-                this.startTimer();
-            }
-            this.needShow = false;
-        }
-
-        if(!this.message) {
-            return <div style={{"display":"none"}}></div>
-        }
+			this.handelMessage();
+			this.haveNewMsg = false;
+		}
         return <div className={"toastDialog "+this.alignCssClassName} style={this.state.style}>{this.message}</div>
     }
 
     componentWillReceiveProps() {
         this.haveNewMsg = true;
-        if(this.props.noQueue) {
-            console.log(this.props);
-        }
     }
 
     addMessageToQueue() {
@@ -52,30 +29,32 @@ class Toast extends Component{
             this.queue = new StoreRecentQueue();
         }
         let msg = this.props;
-        this.queue.offer({
-            preDelay : msg.preDelay || this.preDelay || 200,
-            duration : msg.duration || this.duration || 3000,
-            message : msg.message
-        });
+		this.queue.offer({
+			preDelay : msg.preDelay || this.preDelay || 200,
+			duration : msg.duration || this.duration || 3000,
+			message : msg.message
+		});
+    }
+	
+	setCurrentMsg(msg) {
+		this.preDelay = msg.preDelay || this.preDelay || 200;
+		this.duration = msg.duration || this.duration || 3000;
+		this.message = msg.message || "";
+        this.startShowMsg();
+	}
+
+    handelMessage() {
+		if(!this.props.message && this.props.message != "") {
+			return;
+		}
+        if(!this.timer || this.props.noQueue) {
+            this.setCurrentMsg(this.props);
+		} else {
+            this.addMessageToQueue();
+		}
     }
 
-    getMessage() {
-        let msg = null;
-        if(!this.timer && this.queue && this.queue.getSize() > 0) {
-            msg = this.queue.poll();
-        } else {
-            msg = this.props;
-        }
-        if(msg.message != null) {
-            this.preDelay = msg.preDelay || this.preDelay || 200;
-            this.duration = msg.duration || this.duration || 3000;
-            this.message = msg.message;
-            return true;
-        }
-        return false;
-    }
-
-    startTimer() {
+    startShowMsg() {
         if(this.timer) {
             clearTimeout(this.timer);
             this.setState({style:{display:"block", "opacity":"1"}});
@@ -100,6 +79,11 @@ class Toast extends Component{
         }
         this.message = null;
         this.setState({"style":{"display":"none"}, message:null});
+		
+		if(this.queue && this.queue.getSize() > 0) {
+			this.setCurrentMsg(this.queue.poll());
+			this.startShowMsg();
+		}
     }
 }
 
