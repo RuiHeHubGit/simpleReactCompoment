@@ -50,3 +50,8 @@
     background-position: center;
     background-size: 90%;
 }
+
+.disabledOperation {
+    opacity: 0.5;
+    cursor: not-allowed;
+}

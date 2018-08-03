@@ -9,28 +9,45 @@ class RadioButton extends Component {
     }
 
     render() {
-        return (<div className="radioButton" style={this.props.style} ref="radioButton">
+        return (<div className={"radioButton"+(this.props.disabled?" disabledOperation":"")} style={this.props.style} ref="radioButton">
             <div className="radioButtonButton">
                 <div className="radioButtonButtonCheckedSign" style={{"opacity":this.state.checked?"1":"0"}}></div>
             </div>
             <div className="radioButtonText">{this.props.text}</div>
-            <input type="radio" style={{"display":"none"}} name={this.props.name} ref="radio" />
+            <input type="radio" style={{"display":"none"}} name={this.props.name} ref="radio" disabled={this.props.disabled}/>
         </div>);
     }
 
     componentDidMount() {
         let currentRadioGroup = radioButtons[[this.props.name || "defaultRadioName"]];
         if(!currentRadioGroup) {
-            currentRadioGroup = {selectIndex:0, lastSelectIndex:-1, radios:[]};
+            currentRadioGroup = {selectIndex:-1, lastSelectIndex:-1, radios:[]};
             radioButtons[this.props.name || "defaultRadioName"] = currentRadioGroup;
         }
         currentRadioGroup.radios.push(this);
-        if(this.props.checked) {
-            this.handleClick(null, true);
-        } else {
-            currentRadioGroup.radios[0].handleClick(null, true);
+        if(currentRadioGroup.selectIndex == -1) {
+            if (!this.props.disabled && this.props.checked) {
+                this.handleClick(null, true);
+            } else {
+                for (let i = 0, l = currentRadioGroup.radios.length-1; i < l; ++i) {
+                    if (!currentRadioGroup.radios[i].props.disabled) {
+                        currentRadioGroup.radios[i].handleClick(null, true);
+                        break;
+                    }
+                    if (i == l - 1) {
+                        if (!this.props.disabled) {
+                            this.handleClick(null, true);
+                        }
+                    }
+                }
+            }
         }
-        this.refs.radioButton.addEventListener('click',()=>{this.handleClick()}, false);
+
+        this.refs.radioButton.addEventListener('click',()=>{
+            if(this.props.disabled)
+                return;
+            this.handleClick();
+        }, false);
     }
 
     componentWillUnmount() {

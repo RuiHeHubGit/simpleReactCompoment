@@ -4,7 +4,8 @@ class SwitchButton extends Component {
     constructor(props) {
         super(props);
         this.props = props;
-        this.state = {
+        this.state = {on:  this.props.on || false, first: true};
+        this.styleData = {
             onStyle:  {
                 slide:{"width":"50%", "height":"100%", "background":"#5aa", "position":"absolute", "left":"50%", "transition":"all .3s ease-out"},
                 onBox:{"opacity":"1", "color":"#5aa",  "width":"50%", "height":"100%", "background":"#ddd", "position":"absolute", "left":"0",  "display":"table-cell", "transition":"all .5s ease-out"},
@@ -15,17 +16,16 @@ class SwitchButton extends Component {
                 onBox:{"opacity":"0", "color":"#5aa",  "width":"50%", "height":"100%", "background":"#ddd", "position":"absolute", "left":"0",  "display":"table-cell", "transition":"all .5s ease-out"},
                 offBox:{"opacity":"1", "color":"#777", "width":"50%", "height":"100%", "background":"#ddd", "position":"absolute", "right":"0",  "display":"table-cell", "transition":"all .5s ease-out"}
             },
-            boxStyle: {"width":"100px", "height":"30px", "cursor":"pointer", "position":"relative","user-select": "none",
+            boxStyle: {"width":"100px", "height":"30px", "position":"relative","user-select": "none",
                 "overflow":"hidden", "textOverflow":"ellipsis", "whiteSpace": "nowrap", "display": "table-cell"},
             textStyle: {"position":"absolute", "left":"50%", "top":"50%", "transform": "translateX(-50%)  translateY(-50%)"},
             onText:  this.props.onText || "on",
-            offText:  this.props.offText || "off",
-            on:  this.props.on || false,
-            first: true
+            offText:  this.props.offText || "off"
         };
     }
 
     render() {
+
         if(this.state.first) {
             this.state.first = false;
             if(this.props.style) {
@@ -36,11 +36,12 @@ class SwitchButton extends Component {
                     var compStyle = this.props.compStyle;
                     var style;
                     if(p.startsWith("on-")) {
-                        style = this.state.onStyle;
+                        style = this.styleData.onStyle;
                     } else {
-                        style = this.state.offStyle;
+                        style = this.styleData.offStyle;
                     }
                     var k = p.substr(p.indexOf("-")+1);
+
                     switch (k) {
                         case "slideBg":
                             style.slide["background"] = compStyle[p];
@@ -67,27 +68,39 @@ class SwitchButton extends Component {
                 }
 
                 for (var p in this.props.style) {
-                    this.state.boxStyle[p] = this.props.style[p];
+                    this.styleData.boxStyle[p] = this.props.style[p];
                 }
             }
-
         }
 
-        var style = this.state[this.state.on?"onStyle":"offStyle"];
+        let curStyle = this.styleData[this.state.on?"onStyle":"offStyle"];
         return (
-            <div onClick={this.handleClick.bind(this)} style={this.state.boxStyle}>
-                <div style={style.onBox}>
-                    <div style={this.state.textStyle}>{this.state.onText}</div>
+            <div onClick={this.handleClick.bind(this)} style={this.styleData.boxStyle}  ref="box">
+                <div style={curStyle.onBox}>
+                    <div style={this.styleData.textStyle}>{this.styleData.onText}</div>
                 </div>
-                <div style={style.offBox}>
-                    <div style={this.state.textStyle}>{this.state.offText}</div>
+                <div style={curStyle.offBox}>
+                    <div style={this.styleData.textStyle}>{this.styleData.offText}</div>
                 </div>
-                <div style={style.slide}></div>
+                <div style={curStyle.slide}></div>
+                {this.onRendered()}
             </div>
         );
     }
 
+    onRendered() {
+        setTimeout(()=>{
+            if(this.props.disabled) {
+                this.refs.box.style.opacity = 0.5;
+                this.refs.box.style.cursor = "not-allowed";
+            }
+        }, 100);
+    }
+
     handleClick () {
+        if(this.props.disabled) {
+            return;
+        }
         this.setState({on: !this.state.on});
         if(this.props.onchange != null) {
             this.props.onchange(this.state.on, this);

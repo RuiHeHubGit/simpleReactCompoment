@@ -40,7 +40,8 @@ class App extends Component {
                         <TextView text={"TextView2"} style={{"margin":"22px", "color":"#58f"}}/>,
                         <TextEdit value={"edit1"} style={{"margin":"22px"}} onchange={(value)=>this.setState({msg2:value})}/>,
                         <TextEdit value={"edit2"} style={{"margin":"22px", "color":"red"}} onchange={(value)=>this.setState({msg2:value})} leftIcon={logo}/>,
-                        <TextEdit value={"edit3"} style={{"margin":"22px"}} leftIcon={logo} rightIcon={logo} onchange={(value)=>this.setState({msg2:value})} />,
+                        <TextEdit value={"edit3"} style={{"margin":"22px"}} leftIcon={logo} rightIcon={logo} disabled={true}
+                                  onchange={(value)=>this.setState({msg2:value})} />,
                         <TextEdit value={"edit3"} style={{"margin":"22px"}} rightIcon={this.state.edit3Right} type={this.state.edit3Type}
                                   onchange={(value)=>this.setState({msg2:value})}
                                   onRIconClick={(flag)=>{
@@ -51,9 +52,9 @@ class App extends Component {
                                       }
                                   }}/>,
                         <SwitchButton style={{"borderRadius":"5px", "margin":"22px"}} onchange={(on, tag)=>this.setState({msg2:on?"on":"off"})}/>,
-                        <SwitchButton style={{"margin":"22px"}} on={true} onchange={(on, tag)=>this.setState({msg2:on?"on":"off"})}/>,
+                        <SwitchButton style={{"margin":"22px"}} on={true} onchange={(on, tag)=>this.setState({msg2:on?"on":"off"})} disabled={true}/>,
                         <Button text={"button1"} onclick={(e)=>this.setState({msg1:"click button1"})} style={{"margin":"22px"}}/>,
-                        <Button text={"button2"} onclick={(e)=>this.setState({msg1:"click button2"})} style={{"margin":"22px"}}/>,
+                        <Button text={"button2"} onclick={(e)=>this.setState({msg1:"click button2"})} style={{"margin":"22px"}} disabled={true}/>,
 
                         <div>
                             <div style={{"marginBottom":"5px"}}>
@@ -72,9 +73,9 @@ class App extends Component {
                             </div>
                         </div>,
 
-                        <CheckBox text="checbox1" style={{"margin":"22px"}} onchange={(checked)=>this.setState({msg2:"checked: "+checked})}/>,
+                        <CheckBox text="checbox1" style={{"margin":"22px"}} onchange={(checked)=>this.setState({msg2:"checked: "+checked})} disabled={true}/>,
                         <CheckBox text="checbox2" style={{"margin":"22px"}} checked={true} onchange={(checked)=>this.setState({msg2:"checked: "+checked})}/>,
-                        <RadioButton name="group_1" text="group_1_radio_1" value="A" style={{"margin":"22px"}}
+                        <RadioButton name="group_1" text="group_1_radio_1" value="A" style={{"margin":"22px"}} disabled={true}
                                      onchange={(index, value)=>this.setState({msg2:"index:"+index+", value:"+value})}/>,
                         <RadioButton name="group_1" text="group_1_radio_2" value="B" style={{"margin":"22px"}}/>,
                         <RadioButton name="group_1" text="group_1_radio_3" value="C" style={{"margin":"22px"}}/>,

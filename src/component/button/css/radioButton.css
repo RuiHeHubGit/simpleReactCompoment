@@ -38,3 +38,8 @@
     bottom: 2px;
     display: inline;
 }
+
+.disabledOperation {
+    opacity: 0.5;
+    cursor: not-allowed;
+}

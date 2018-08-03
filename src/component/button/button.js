@@ -7,13 +7,16 @@ class Button extends Component {
     }
 
     handleClick(e) {
+        if(this.props.disabled) {
+            return;
+        }
         if(typeof this.props.onclick == "function") {
             this.props.onclick(e);
         }
     }
 
     render() {
-        return (<div className="button" style={this.props.style} onClick={this.handleClick.bind(this)}>{this.props.text}</div>);
+        return (<div className={"button"+(this.props.disabled?" disabledOperation":"")} style={this.props.style} onClick={this.handleClick.bind(this)}>{this.props.text}</div>);
     }
 }
 

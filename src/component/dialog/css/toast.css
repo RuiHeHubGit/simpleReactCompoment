@@ -4,6 +4,7 @@
     opacity: 0;
     transition: all .3s ease-in;
 
+    min-height: 24px;
     padding: 10px 20px;
     color: #ffffff;
     background-color: rgba(34, 34, 34, 0.8);

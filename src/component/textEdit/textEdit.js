@@ -37,11 +37,11 @@ class TextEdit extends Component {
         }
 
         return <div>
-            <div className="textEditBox">
+            <div className={"textEditBox"}>
                 <div className={"textEditLeft"} style={leftIconStyle} ref={"leftIcon"} ></div>
                 <div className={"textEditRight"} style={rightIconStyle} ref={"rightIcon"} ></div>
-                <input className={inputClassName} value={this.state.value}
-                       style={inputStyle} type={editType} ref={"input"}/>
+                <input className={inputClassName+(this.props.disabled?" disabledOperation":"")} value={this.state.value}
+                       style={inputStyle} type={editType} ref={"input"} disabled={this.props.disabled}/>
             </div>
         </div>
     }
@@ -56,6 +56,9 @@ class TextEdit extends Component {
         });
 
         this.refs.input.addEventListener("click", (event)=>{
+            if(this.props.disabled) {
+                return;
+            }
             let rect = this.refs.input.getBoundingClientRect();
             let x = event.clientX-rect.left;
             console.log(x)

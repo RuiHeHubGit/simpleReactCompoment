@@ -12,3 +12,8 @@
 .button:hover{
      opacity: 0.8;
  }
+
+.disabledOperation {
+    opacity: 0.5;
+    cursor: not-allowed;
+}

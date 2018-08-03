@@ -13,13 +13,16 @@ class CheckBox extends Component {
         if(this.state.checked) {
             buttonStyle = {"backgroundImage":"url("+checkBG+")"};
         }
-        return (<div className="checkbox" style={this.props.style} onClick={this.handleClick.bind(this)}>
+        return (<div className={"checkbox"+(this.props.disabled?" disabledOperation":"")} style={this.props.style} onClick={this.handleClick.bind(this)}>
             <div className="checkboxButton" style={buttonStyle}></div>
             <div className="checkboxText">{this.props.text}</div>
         </div>);
     }
 
     handleClick() {
+        if(this.props.disabled) {
+            return;
+        }
         this.setState({checked:!this.state.checked});
         if(typeof this.props.onchange == "function") {
             this.props.onchange(!this.state.checked, this);
