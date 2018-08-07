@@ -1,4 +1,5 @@
 import  React, {Component} from 'react';
+import ClickEffect from "../common/clickEffect";
 
 class SwitchButton extends Component {
     constructor(props) {
@@ -75,7 +76,7 @@ class SwitchButton extends Component {
 
         let curStyle = this.styleData[this.state.on?"onStyle":"offStyle"];
         return (
-            <div onClick={this.handleClick.bind(this)} style={this.styleData.boxStyle}  ref="box">
+            <div onClick={this.handleClick.bind(this)} style={this.styleData.boxStyle}  ref="button">
                 <div style={curStyle.onBox}>
                     <div style={this.styleData.textStyle}>{this.styleData.onText}</div>
                 </div>
@@ -91,8 +92,8 @@ class SwitchButton extends Component {
     onRendered() {
         setTimeout(()=>{
             if(this.props.disabled) {
-                this.refs.box.style.opacity = 0.5;
-                this.refs.box.style.cursor = "not-allowed";
+                this.refs.button.style.opacity = 0.5;
+                this.refs.button.style.cursor = "not-allowed";
             }
         }, 100);
     }
@@ -101,6 +102,7 @@ class SwitchButton extends Component {
         if(this.props.disabled) {
             return;
         }
+        ClickEffect.bind(this.refs.button);
         this.setState({on: !this.state.on});
         if(this.props.onchange != null) {
             this.props.onchange(this.state.on, this);

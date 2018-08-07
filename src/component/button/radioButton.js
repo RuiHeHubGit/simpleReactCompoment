@@ -1,5 +1,6 @@
 import React,{Component} from 'react';
 import './css/radioButton.css'
+import ClickEffect from "../common/clickEffect";
 var radioButtons= {};
 class RadioButton extends Component {
     constructor(props) {
@@ -10,7 +11,7 @@ class RadioButton extends Component {
 
     render() {
         return (<div className={"radioButton"+(this.props.disabled?" disabledOperation":"")} style={this.props.style} ref="radioButton">
-            <div className="radioButtonButton">
+            <div className="radioButtonButton" ref="button">
                 <div className="radioButtonButtonCheckedSign" style={{"opacity":this.state.checked?"1":"0"}}></div>
             </div>
             <div className="radioButtonText">{this.props.text}</div>
@@ -76,7 +77,7 @@ class RadioButton extends Component {
         if(flag) {
             return;
         }
-
+        ClickEffect.bind(this.refs.button);
         if(currentRadioGroup.lastSelectIndex != currentRadioGroup.selectIndex) {
             currentRadioGroup.lastSelectIndex = currentRadioGroup.selectIndex;
             let checkedRadio = currentRadioGroup.radios[currentRadioGroup.selectIndex];
