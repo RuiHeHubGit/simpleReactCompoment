@@ -94,6 +94,9 @@ class SwitchButton extends Component {
             if(this.props.disabled) {
                 this.refs.button.style.opacity = 0.5;
                 this.refs.button.style.cursor = "not-allowed";
+            } else {
+                this.refs.button.style.opacity = 1;
+                this.refs.button.style.cursor = "pointer";
             }
         }, 100);
     }

@@ -11,5 +11,6 @@
 .clickEffect {
     position: fixed;
     z-index: 999999;
-    animation:clickAnimation .3s linear;
+    cursor: pointer;
+    animation:clickAnimation .2s linear;
 }
