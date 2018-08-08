@@ -77,7 +77,7 @@ class RadioButton extends Component {
         if(flag) {
             return;
         }
-        ClickEffect.bind(this.refs.button);
+        ClickEffect.show(this.refs.button);
         if(currentRadioGroup.lastSelectIndex != currentRadioGroup.selectIndex) {
             currentRadioGroup.lastSelectIndex = currentRadioGroup.selectIndex;
             let checkedRadio = currentRadioGroup.radios[currentRadioGroup.selectIndex];

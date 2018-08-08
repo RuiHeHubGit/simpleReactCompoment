@@ -24,7 +24,7 @@ class CheckBox extends Component {
         if(this.props.disabled) {
             return;
         }
-        ClickEffect.bind(this.refs.button);
+        ClickEffect.show(this.refs.button);
         this.setState({checked:!this.state.checked});
         if(typeof this.props.onchange == "function") {
             this.props.onchange(!this.state.checked, this);

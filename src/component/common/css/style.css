@@ -1,6 +1,6 @@
 @keyframes clickAnimation {
     from {
-        transform: scale(1, 1);
+        transform: scale(0.9, 0.9);
         opacity: 0.7;
     }
     to {
@@ -12,5 +12,5 @@
     position: fixed;
     z-index: 999999;
     cursor: pointer;
-    animation:clickAnimation .2s linear;
+    animation:clickAnimation .3s linear;
 }

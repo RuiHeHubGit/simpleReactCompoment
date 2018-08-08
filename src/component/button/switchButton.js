@@ -101,14 +101,14 @@ class SwitchButton extends Component {
         }, 100);
     }
 
-    handleClick () {
+    handleClick (event) {
         if(this.props.disabled) {
             return;
         }
-        ClickEffect.bind(this.refs.button);
+        ClickEffect.show(this.refs.button, event);
         this.setState({on: !this.state.on});
         if(this.props.onchange != null) {
-            this.props.onchange(this.state.on, this);
+            this.props.onchange(this.state.on, this, event);
         }
     }
 }

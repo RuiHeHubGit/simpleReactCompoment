@@ -7,13 +7,14 @@ class Button extends Component {
         this.props = props;
     }
 
-    handleClick(e) {
+    handleClick(event) {
+        console.log(event.clientX,event.clientY);
         if(this.props.disabled) {
             return;
         }
-        ClickEffect.bind(this.refs.button);
+        ClickEffect.show(this.refs.button, event);
         if(typeof this.props.onclick == "function") {
-            this.props.onclick(e);
+            this.props.onclick(event);
         }
     }
 
